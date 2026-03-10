@@ -1,6 +1,9 @@
 <?php
+require_once "csrf.php";
 require_once "db.php";
-
+if(!verify_csrf($_POST['csrf_token'] ?? '')){
+    die("CSRF token không hợp lệ!");
+}
 $db = new Database();
 
 $id = $_POST['id'];
