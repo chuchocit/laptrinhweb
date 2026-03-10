@@ -16,14 +16,22 @@ $users = $db->select($sql);
         <th>ID</th>
         <th>Username</th>
         <th>Email</th>
+        <th>Action</th>
     </tr>
 
-<?php foreach($users as $user): ?>
-    <tr>
-        <td><?php echo $user['id']; ?></td>
-        <td><?php echo $user['username']; ?></td>
-        <td><?php echo $user['email']; ?></td>
-    </tr>
-<?php endforeach; ?>
+    <?php foreach ($users as $user): ?>
+        <tr>
+            <td><?php echo $user['id']; ?></td>
+            <td><?php echo $user['username']; ?></td>
+            <td><?php echo $user['email']; ?></td>
+            <td>
+                <a href="edit_user.php?id=<?php echo $user['id']; ?>">Sửa</a>
+                <a href="delete_user.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Bạn có chắc muốn xóa?')">Xóa</a>
 
+            </td>
+            <td>
+                <a href="user_detail.php?id=<?php echo $user['id']; ?>">Chi tiết</a>
+            </td>
+        </tr>
+    <?php endforeach; ?>
 </table>
