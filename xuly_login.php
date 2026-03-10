@@ -2,21 +2,28 @@
 session_start();
 require_once "db.php";
 
-//lay du lieu tu form
-$username = $_POST['username'];
-$password = $_POST['password'];
+$db = new Database();
 
-//cau lenh sql
-$sql = "SELECT * FROM WHERE username = '$username' AND password = '$password'";
-$result = mysqli_query($conn, $sql);
+$username = $_POST['username'] ?? "";
+$password = $_POST['password'] ?? "";
 
-//kiem tra dang nhap
-if(mysqli_num_rows($result) > 0){
-    $_SESSION['username'] = $username;
-    echo "Dang nhap thanh cong!";
+// câu lệnh SQL
+$sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+
+// gọi hàm select trong class
+$result = $db->select($sql, "ss", [$username, $password]);
+
+if(count($result) > 0){
+
+    // lưu session
+    $_SESSION['username'] = $result[0]['username'];
+    $_SESSION['user_id'] = $result[0]['id'];
+
+    // chuyển trang
     header("Location: index.php");
+    exit;
 
+}else{
+    echo "Sai tài khoản hoặc mật khẩu";
 }
-else{
-    echo "Sai username hoac password";
-}
+?>

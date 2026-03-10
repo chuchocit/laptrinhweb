@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Sign in</h2>
-    <form action="xuly_login" method="post">
+    <form action="xuly_login.php" method="post">
         Username: <br>
         <input type="text" name="username" required> <br><br>
         Password: <br>
