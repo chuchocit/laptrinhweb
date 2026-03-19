@@ -1,3 +1,0 @@
-
-Version merged from master and test_conflict
-
